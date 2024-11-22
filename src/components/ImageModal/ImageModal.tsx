@@ -2,6 +2,7 @@ import style from './ImageModal.module.css';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 import { CgCloseO } from 'react-icons/cg';
+import { Image } from '../../App';
 const customStyles = {
   content: {
     top: '50%',
@@ -12,7 +13,22 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
   },
 };
-const ImageModal = ({ modalIsOpen, closeModal, selectedImg }) => {
+interface SelectedImg {
+  url: string;
+  description?: string | null;
+  author: string;
+}
+interface ImageModalProps {
+  modalIsOpen: boolean;
+  closeModal: () => void;
+  selectedImg: SelectedImg | null;
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({
+  modalIsOpen,
+  closeModal,
+  selectedImg,
+}) => {
   return (
     <Modal
       className={style.customModalContent}
@@ -21,7 +37,7 @@ const ImageModal = ({ modalIsOpen, closeModal, selectedImg }) => {
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Expended image"
-      appElement={document.getElementById('root')}
+      appElement={document.getElementById('root') || document.body}
     >
       <button
         className={style.btnClose}

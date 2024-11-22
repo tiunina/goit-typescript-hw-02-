@@ -1,5 +1,10 @@
 import style from './SearchBar.module.css';
-const SearchBar = ({ onSubmit }) => {
+
+interface SearchBarProps {
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
   return (
     <header className={style.header}>
       <form onSubmit={onSubmit}>
